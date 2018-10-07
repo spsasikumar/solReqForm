@@ -380,18 +380,18 @@
 			
 
 			<div id="queuedata" class="ui bottom attached tab segment" data-tab="queuetab">
-				<form class="ui form" name="queueform">
+				<div class="ui form" id="queueform">
 					<div class="ui two column center aligned green raised grid segment">
 						<div class="row">
-							<div class="ui center aligned column grid">
+							<div class="ui left aligned column grid">
 								<div class="field">
-									<div class="ui pointing below teal label">VPN Name</div>
+									<div class="ui teal circular label">VPN Name</div>
 									<input class="ui fluid input focus" type="text" name="qvpnname">
 								</div>
 							</div>
-							<div class="ui center aligned column grid">
+							<div class="ui left aligned column grid">
 								<div class="field">
-									<div class="ui pointing below teal label">Queue Name</div>
+									<div class="ui teal circular label">Queue Name</div>
 									<div class="ui focus left icon input">
 										<i class="exchange icon"></i>
 										<input type="text" name="queuename">
@@ -400,9 +400,9 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="ui center aligned column grid">	
+							<div class="ui left aligned column grid">	
 								<div class="field">
-									<div class="ui pointing below teal label">Queue Quota</div>
+									<div class="ui teal circular label">Queue Quota</div>
 									<div class="ui focus right labeled left icon input">
 										<i class="database icon"></i>
 										<input type="number" id="queuequota" placeholder="">
@@ -410,9 +410,9 @@
 									</div>
 								</div>
 							</div>
-							<div class="ui center aligned column grid">
+							<div class="ui left aligned column grid">
 								<div class="field">
-									<div class="ui pointing below teal label">Queue Type</div>
+									<div class="ui teal circular label">Queue Type</div>
 									<div class="ui focus right labeled left icon input">
 										<div class="ui fluid dropdown selection">
 											<input type="hidden" name="qtype">
@@ -428,18 +428,18 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="ui center aligned column grid">	
+							<div class="ui left aligned column grid">	
 								<div class="field">
-									<div class="ui pointing below teal label">Max Redelivery</div>
+									<div class="ui teal circular label">Max Redelivery</div>
 									<div class="ui labeled left icon input">
 										<i class="undo icon"></i>
 										<input type="number" id="queuequota" value=0 placeholder="">
 									</div>
 								</div>
 							</div>
-							<div class="ui center aligned column grid">	
+							<div class="ui left aligned column grid">	
 								<div class="field">
-									<div class="ui pointing below teal label">Queue Owner</div>
+									<div class="ui teal circular label">Queue Owner</div>
 									<div class="ui focus left icon input">
 										<i class="user icon"></i>
 										<input type="text" id="qowner" placeholder="">
@@ -448,9 +448,9 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="ui center aligned column grid">	
+							<div class="ui left aligned column grid">	
 								<div class="field">
-									<div class="ui pointing below teal label">Permissions for Non-Owner Clients</div>
+									<div class="ui teal circular label">Permissions for Non-Owner Clients</div>
 									<div class="ui labeled left icon input">
 										<i class="user plus icon"></i>
 										<input type="text" id="qotherpermission" placeholder="">
@@ -458,7 +458,7 @@
 								</div>
 							</div>
 							<div class="ui center aligned column grid">	
-								<div class="ui pointing below teal label">Max TTL</div>
+								<div class="ui teal circular label">Max TTL</div>
 								<div class="inline fields">
 									<label></label>
 									<div class="field">
@@ -483,18 +483,18 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="ui center aligned column grid">	
+							<div class="ui left aligned column grid">	
 								<div class="field">
-									<div class="ui pointing below teal label">Topic Subscription</div>
+									<div class="ui teal circular label">Topic Subscription</div>
 									<div class="ui labeled left icon input">
 										<i class="level up alternate icon"></i>
 										<input type="text" id="qtopicsub" placeholder="Topic Msg to spooled">
 									</div>
 								</div>
 							</div>
-							<div class="ui center aligned column grid">	
+							<div class="ui left aligned column grid">	
 								<div class="field">
-									<div class="ui pointing below teal label">Topic Subscription Exception</div>
+									<div class="ui teal circular label">Topic Subscription Exception</div>
 									<div class="ui focus left icon input">
 										<i class="level down alternate icon"></i>
 										<input type="text" id="qtopicexp" placeholder="Topic Msg not to be spooled">
@@ -503,13 +503,13 @@
 							</div>
 						</div>
 					</div>
-					<button class="ui green button" name="queuevalid" onClick="valid_queue_tab()">
+					<div class="ui green submit button" id="queuevalid" onClick="valid_queue_tab()">
 						<i class="check icon"></i><strong>Validate</strong>
-					</button>
-					
-					<button class="ui blue disabled button" name="queuedownload"><i class="download icon"></i><strong>Download</strong></button>
-					<button class="ui red button"><strong>Next</strong><i class="hand point right icon"></i></button>
-				</form>
+					</div>
+					<div class="ui blue button" id="queuedownload"><i class="download icon"></i><strong>Download</strong></div>
+				<!--	<button class="ui red button"><strong>Next</strong><i class="hand point right icon"></i></button> -->
+					<div class="ui error message"></div>
+				</div>
 			</div> <!-- Queue tab ends -->
 
 			<div id="usernamedata" class="ui bottom attached tab segment" data-tab="usernametab">

@@ -60,7 +60,7 @@ $(document).ready(function() {
     $('.tabular.menu .item').tab();
 });
 
-function qenabledownload(fields) {
+function qenabledownload() {
     $("#queuedownload").removeClass("disabled");
     $("#queuedownload").addClass("active"); 
   }
@@ -73,41 +73,11 @@ function qenabledownload(fields) {
 
 function valid_queue_tab()
 {
-    (function ($) {
-        $.fn.serializeFormJSON = function () {
-    
-            var o = {};
-            var a = this.serializeArray();
-            $.each(a, function () {
-                if (o[this.name]) {
-                    if (!o[this.name].push) {
-                        o[this.name] = [o[this.name]];
-                    }
-                    o[this.name].push(this.value || '');
-                } else {
-                    o[this.name] = this.value || '';
-                }
-            });
-            return o;
-        };
-    })(jQuery);
-    
-    $('#queueform').submit(function (e) {
-        e.preventDefault();
-        var data = $(this).serializeFormJSON();
-        console.log(data);
-    
-        /* Object
-            email: "value"
-            name: "value"
-            password: "value"
-         */
-    });
-}
-
-   /* $(document).ready(function() {
-  
-    $('#queueform').validate( {
+    $('#queueform').form({
+ //fields : validationRules,
+  inline : true,
+on     : 'blur',
+   fields: {
     qvpnname: {
       identifier  : 'qvpnname',
       rules: [
@@ -125,40 +95,21 @@ function valid_queue_tab()
           prompt : 'Please enter queue name'
         }
       ]
-    },    
-  /*  onSuccess: function(event, fields){
-        $('#info').html("on success");
-        console.log("on success");
-        console.log(fields);
-        event.preventDefault();
+    }
     },
-    onFailure: function(formErrors, fields){
-        $('#info').html("on failure");
-        console.log("on failure");
-        console.log(fields);
-    }    
-}); 
 
-$('#queueform input').bind('keyup blur click', function () { // fires on every keyup & blur
-    if ($('#queueform').validate().checkForm()) {                   // checks form for validity
-        $('#queuedownload').removeClass('button_disabled').prop('disabled', false); // enables button
-    } else {
-        $('#queuedownload').addClass('button_disabled').prop('disabled', true);   // disables button
-    }
-});
+  onSuccess: function(event, fields){
+    $("#queuedownload").removeClass("disabled");
+    $("#queuedownload").addClass("active"); 
+    event.preventDefault();
+},
+onFailure: function(formErrors, fields){
+    $("#queuedownload").addClass("disabled");
+    $("#queuedownload").removeClass("active");
+}   
 
+});  
 
-
-/*
-  $('#queueform input').on('keyup blur', function () { // fires on every keyup & blur
-    if ($('#queueform').valid()) {                      // checks form for validity
-        $('#queuedownload').prop('disabled', false);        // enables button
-    } else {
-        $('#queuedownload').prop('disabled', 'disabled');   // disables button
-    }
-});
-
-}); */
-
+}
 
 
