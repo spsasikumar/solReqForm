@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		
+		<!-- Standard Meta -->
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+		<link rel="stylesheet" type="text/css" href="css/semantic.min.css">
+		<link rel="stylesheet" type="text/css" href="css/testing.css">
+		<link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css">
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/components/icon.css">
+		<script src="js/jquery-3.1.1.min.js"></script>
+		<script src="js/jquery-ui.min.js"></script>
+		<script src="js/semantic.min.js"></script>
+		<script src="js/solace.js"></script>
+		<script src="js/jquery.serialize-object.min.js"></script>
+		<title>Solace</title>
+		<!--
+		<script>
+			$(document).ready(function() {
+				$('.ui.dropdown').dropdown({
+				on: 'hover'
+				});
+				$('.ui.menu a.item').on('click', function() {
+				$(this).addClass('active').siblings().removeClass('active');
+				});
+			});
+		</script> -->
+		<script>
+			$(document).ready( function() {
+			$( ".ui.accordion" ).accordion();
+		/*	$('.ui.dropdown').dropdown({
+			on: 'hover'
+			}); */
+			} );
+		</script>
+	
+	</head>
+	
+	<body>
+		<!--########## Main container ########## -->
+		<div class="ui container">
+			<!--########## Main heading ########## -->
+			<br><h2 class="ui center aligned icon header">
+				<a class="item"><i class="circular world icon"></i>Solace Request Form
+			</h2></a><br>
+			<!--########## Main heading ########## -->
+			<div class="ui top attached tabular menu"> 
+				<div class="ui secondary pointing menu">
+					<a id="solappinfo" class="item active" data-tab="solappinfo">Solace Appliance</a>
+					<a id="appinfo" class="item" data-tab="appinfo">App Info</a>
+					<a id="queuetab" class="item" data-tab="msgvpntab">Msg-VPN</a>
+					<a id="usernametab" class="item" data-tab="queuetab">Queue</a>
+					<a id="usernametab" class="item" data-tab="usernametab">Username</a>
+					<a id="bridgetab" class="item" data-tab="bridgetab">Bridge</a>
+					<a id="jnditab" class="item" data-tab="jnditab">JNDI</a>
+				</div>		
+			</div>
+
+			<div id="solappinfodata" class="ui bottom attached tab segment" data-tab="solappinfo">
+				<form class="ui form"><br>
+					<div class="ui center aligned column grid">
+						<p id="createobj">Create Objects</p>
+				    	<input class="tgl tgl-light" name="tgltoogle" id="cb1" type="checkbox"/>
+						<label class="tgl-btn" for="cb1"></label>
+						<p id="modobj">Modify Objects</p>
+					</div>
+				</form>
+			</div> <!-- Solace app tab ends -->
+			
+			<div id="appinfodata" class="ui bottom attached tab segment" data-tab="appinfo">
+				<form class="ui form">	
+					appainfo		  
+				</form> <!-- Seconds tab ends -->
+			</div>
+
+			<div id="msgvpndata" class="ui bottom attached tab segment" data-tab="msgvpntab">
+				<form class="ui form"><br>
+					<div class="ui center aligned column grid">
+						<p id="createobj">Guaranteed VPN</p>
+						<input class="tgl tgl-light" name="vpnedit" id="vpnedit" type="checkbox"/>
+						<label class="tgl-btn" for="vpnedit"></label>
+						<p id="modobj">MNR VPN</p>
+					</div>
+					<div class="ui green raised segment">
+						<a class="ui blue right ribbon label">VPN Name</a>
+						<div class="ui one column center aligned stackable grid"><br>
+							<div class="row">
+								<!--<div class="ui center aligned column grid">
+									<div class="grouped fields" id="dctype">
+										<label></label>
+										<div class="field">
+											<div class="ui center slider checkbox">
+												<input id="CTI" type="radio" name="dc" checked="checked">
+												<label id="vpncti">CTI</label>
+											</div>
+										</div>
+										<div class="field">
+											<div class="ui center slider checkbox">
+												<input id="STI" type="radio" name="dc">
+												<label id="vpnsti">STI</label>
+											</div>
+										</div>
+									</div>
+								</div>-->
+								<div class="ui center aligned column grid">
+									<div class="field" id="vpnname"><br>
+										<div class="ui focus left labeled left icon input">
+											<i class="chess king icon"></i>
+											<input type="text" id="vpnname" placeholder="">
+											<!--<a class="ui label">VPN Name</a>-->
+										</div>
+									</div>
+								</div>
+								<!-- <div class="ui center aligned column grid">
+									<div class="ui black floating dropdown labeled search icon button">
+										<i class="world icon"></i>
+										<span class="text">Select Env</span>
+										<div id="vpnenv" class="menu">
+											<div class="item" data-value="dev">DEV</div>
+											<div class="item" data-value="uat">UAT</div>
+											<div class="item" data-value="prod">PROD</div>
+										</div> 
+									</div>
+								</div>-->
+							</div>
+						</div><br>
+					</div>
+					<div class="ui red raised segment">
+						<a class="ui blue right ribbon label">VPN Properties</a>
+						<div class="ui two column center aligned stackable grid">
+							<div class="row">
+								<div class="ui left aligned column grid">
+									<div class="field" id="vpnend"><br>
+										<div class="ui labeled input">
+											<div class="ui labeled input">
+												<a class="ui label">Max Endpoints</a>
+												<input type="number" placeholder="Endpoints">
+											</div>
+										</div>
+									</div>	
+								</div>
+								<div class="ui left aligned column grid">
+									<div class="field" id="vpnquota"><br>
+										<div class="ui focus right labeled left icon input">
+											<i class="database icon"></i>
+											<input type="number" id="vpnquota" placeholder="VPN Quota">
+											<a class="ui label">MB</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="ui left aligned column grid">
+									<div class="field" id="vpnguar">
+										<div class="ui vertical accordion menu">
+												<a class="ui red tag label">Guaranteed</a>
+											<div class="item">
+												<a class="active title">
+													<i class="dropdown icon"></i><strong>Ingress Flow</strong>
+												</a>
+												<div class="content">
+													<div class="ui form">
+														<div class="grouped fields">
+															<div class="field">
+																<div class="ui radio checkbox">
+																	<input type="radio" name="size" value="50">
+																	<label>Small-50</label>
+																</div>
+															</div>
+															<div class="field">
+																<div class="ui radio checkbox">
+																	<input type="radio" name="size" value="100">
+																	<label>Medium-100</label>
+																</div>
+															</div>
+															<div class="field">
+																<div class="ui radio checkbox">
+																	<input type="radio" name="size" value="200">
+																	<label>Large-200</label>
+																</div>
+															</div>
+															<div class="field">
+																<div class="ui radio checkbox">
+																	<input type="radio" name="size" value=""/>
+																	<label>Others</label>
+																	<div class="ui mini input">
+																		<input type="number" name="size" value="">
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>	
+												</div>	
+											</div>
+											<div class="item">
+												<a class="title">
+													<i class="dropdown icon"></i><strong>Egress Flow</strong>
+												</a>
+												<div class="content">
+													<div class="ui form">
+														<div class="grouped fields">
+															<div class="field">
+																<div class="ui radio checkbox">
+																	<input type="radio" name="size" value="50">
+																	<label>Low-50</label>
+																</div>
+															</div>
+															<div class="field">
+																<div class="ui radio checkbox">
+																	<input type="radio" name="size" value="100">
+																	<label>Medium-100</label>
+																</div>
+															</div>	
+															<div class="field">
+																<div class="ui radio checkbox">
+																	<input type="radio" name="size" value="200">
+																	<label>Large-200</label>
+																</div>
+															</div>
+															<div class="field">
+																<div class="ui radio checkbox">
+																	<input type="radio" name="size" value=""/>
+																	<label>Others</label>
+																	<div class="ui mini input">
+																		<input type="number" name="size" value="">
+																	</div>
+																</div>	
+															</div>
+														</div>													
+													</div>
+												</div>
+											</div> 
+										</div>
+									</div>
+								</div>
+								<div class="ui left aligned column grid">
+									<div class="field">
+										<div class="ui vertical accordion menu">
+												<a class="ui red tag label">Client</a>			
+											<div class="item">
+												<a class="active title">
+													<i class="dropdown icon"></i><strong>Connection Count</strong>
+												</a>
+												<div class="content">
+													<div class="ui form">
+														<div class="grouped fields">
+															<div class="field">
+																<div class="ui radio checkbox">
+																	<input type="radio" name="size" value="50">
+																	<label>Small-50</label>
+																</div>
+															</div>
+															<div class="field">
+																<div class="ui radio checkbox">
+																	<input type="radio" name="size" value="100">
+																	<label>Medium-100</label>
+																</div>
+															</div>
+															<div class="field">
+																<div class="ui radio checkbox">
+																	<input type="radio" name="size" value="200">
+																	<label>Large-200</label>
+																</div>
+															</div>
+															<div class="field">
+																<div class="ui radio checkbox">
+																	<input type="radio" name="size" value=""/>
+																	<label>Others</label>
+																	<div class="ui mini input">
+																		<input type="number" name="size" value="">
+																	</div>		
+																</div>
+															</div>
+														</div>																				
+													</div>
+												</div>
+											</div>
+											<div class="item">
+												<a class="title">
+													<i class="dropdown icon"></i><strong>Subscription Count</strong>
+												</a>
+												<div class="content">
+													<div class="ui form">
+														<div class="grouped fields">
+															<div class="field">
+																<div class="ui radio checkbox">
+																	<input type="radio" name="size" value="100">
+																	<label>Low-200</label>
+																</div>
+															</div>
+															<div class="field">
+																<div class="ui radio checkbox">
+																	<input type="radio" name="size" value="200">
+																	<label>Medium-200</label>
+																</div>
+															</div>
+															<div class="field">
+																<div class="ui radio checkbox">
+																	<input type="radio" name="size" value="400">
+																	<label>Large-200</label>
+																</div>
+															</div>
+															<div class="field">
+																<div class="ui radio checkbox">
+																	<input type="radio" name="size" value=""/>
+																	<label>Others</label>
+																	<div class="ui mini input">
+																		<input type="number" name="size" value=""/>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>	
+										</div>
+									</div>  	
+								</div>
+							</div>
+						</div> 
+					</div>
+					<div class="ui blue raised segment">
+						<a class="ui blue right ribbon label">COB Setup</a>
+						<div class="ui one column center aligned stackable grid">
+							<div class="row">
+								<div class="ui toggle checkbox">
+									<input type="checkbox" name="public">
+									<label>Required COB Setup</label>
+								</div>
+							</div>
+						</div>
+						<div class="ui segment">
+							<a class="ui blue left ribbon label">Replicated Topic</a>
+							<div class="ui two column center aligned grid">
+								<div class="row">
+									<div class="ui left aligned column grid">
+										<div class="field" id="repcard"><br>
+											<div class="ui red cards">
+												<div class="card">
+													<div class="content">
+														<div class="header">By default</div>
+														<div class="description">
+															All topics (<strong>">"</strong>) and all Queues (<strong>"#P2P/QUE/>"</strong>) are replicated with async
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="ui left aligned column grid">
+										<div class="field" id="reptopic"><br>
+											<div class="ui labeled input">
+												<a class="ui label">Add Topic for Sync Mode</a>
+												<input type="number" placeholder="a/b/c">
+											</div>
+										</div>
+									</div>	
+								</div>
+							</div>
+						</div>
+						<div calss="row">
+							<div class="ui center aligned column grid">
+								<div class="field" id="repack"><br>
+									<div class="ui labeled input">
+										<a class="ui label">Ack intervals</a>
+										<input type="number" placeholder="by default 20">
+									</div>
+								</div>
+							</div>
+						</div><br>
+					</div>
+					<button class="ui teal button" id="vpnvalid"><i class="check icon"></i><strong>Validate</strong></button>
+					<button class="ui primary button"><i class="download icon"></i><strong>Download</strong></button>
+					<button class="ui secondary button"><strong>Next</strong><i class="hand point right icon"></i></button>
+				</form>	
+			</div><!-- Third tab ends -->
+			
+
+			<div id="queuedata" class="ui bottom attached tab segment" data-tab="queuetab">
+				<form class="ui form" name="queueform">
+					<div class="ui two column center aligned green raised grid segment">
+						<div class="row">
+							<div class="ui center aligned column grid">
+								<div class="field">
+									<div class="ui pointing below teal label">VPN Name</div>
+									<input class="ui fluid input focus" type="text" name="qvpnname">
+								</div>
+							</div>
+							<div class="ui center aligned column grid">
+								<div class="field">
+									<div class="ui pointing below teal label">Queue Name</div>
+									<div class="ui focus left icon input">
+										<i class="exchange icon"></i>
+										<input type="text" name="queuename">
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="ui center aligned column grid">	
+								<div class="field">
+									<div class="ui pointing below teal label">Queue Quota</div>
+									<div class="ui focus right labeled left icon input">
+										<i class="database icon"></i>
+										<input type="number" id="queuequota" placeholder="">
+										<a class="ui label">MB</a>
+									</div>
+								</div>
+							</div>
+							<div class="ui center aligned column grid">
+								<div class="field">
+									<div class="ui pointing below teal label">Queue Type</div>
+									<div class="ui focus right labeled left icon input">
+										<div class="ui fluid dropdown selection">
+											<input type="hidden" name="qtype">
+											<div class="default text">Select Type</div>
+											<i class="dropdown icon"></i>
+											<div class="menu">
+												<div class="item" data-value="exclusive">Exclusive</div>
+												<div class="item" data-value="non-exclusive">Non-Exclusive</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="ui center aligned column grid">	
+								<div class="field">
+									<div class="ui pointing below teal label">Max Redelivery</div>
+									<div class="ui labeled left icon input">
+										<i class="undo icon"></i>
+										<input type="number" id="queuequota" value=0 placeholder="">
+									</div>
+								</div>
+							</div>
+							<div class="ui center aligned column grid">	
+								<div class="field">
+									<div class="ui pointing below teal label">Queue Owner</div>
+									<div class="ui focus left icon input">
+										<i class="user icon"></i>
+										<input type="text" id="qowner" placeholder="">
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="ui center aligned column grid">	
+								<div class="field">
+									<div class="ui pointing below teal label">Permissions for Non-Owner Clients</div>
+									<div class="ui labeled left icon input">
+										<i class="user plus icon"></i>
+										<input type="text" id="qotherpermission" placeholder="">
+									</div>
+								</div>
+							</div>
+							<div class="ui center aligned column grid">	
+								<div class="ui pointing below teal label">Max TTL</div>
+								<div class="inline fields">
+									<label></label>
+									<div class="field">
+										<div class="ui radio checkbox">
+											<input type="radio" id="ttlmsg" name="respectttl" checked="checked">
+											<label>Respect TTL for msg</label>
+										</div>
+									</div>
+									<div class="field">
+										<div class="ui radio checkbox">
+											<input type="radio" id="ttlq" name="respectttl">
+											<label>Respect TTL for queue</label>
+										</div>
+									</div>
+									<div class="fields">
+										<div class="ui focus left icon input">
+											<i class="thermometer half icon"></i>
+											<input type="number" id="qttl" placeholder="seconds">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="ui center aligned column grid">	
+								<div class="field">
+									<div class="ui pointing below teal label">Topic Subscription</div>
+									<div class="ui labeled left icon input">
+										<i class="level up alternate icon"></i>
+										<input type="text" id="qtopicsub" placeholder="Topic Msg to spooled">
+									</div>
+								</div>
+							</div>
+							<div class="ui center aligned column grid">	
+								<div class="field">
+									<div class="ui pointing below teal label">Topic Subscription Exception</div>
+									<div class="ui focus left icon input">
+										<i class="level down alternate icon"></i>
+										<input type="text" id="qtopicexp" placeholder="Topic Msg not to be spooled">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<button class="ui green button" name="queuevalid" onClick="valid_queue_tab()">
+						<i class="check icon"></i><strong>Validate</strong>
+					</button>
+					
+					<button class="ui blue disabled button" name="queuedownload"><i class="download icon"></i><strong>Download</strong></button>
+					<button class="ui red button"><strong>Next</strong><i class="hand point right icon"></i></button>
+				</form>
+			</div> <!-- Queue tab ends -->
+
+			<div id="usernamedata" class="ui bottom attached tab segment" data-tab="usernametab">
+				<form class="ui form">
+					<div class="ui one column center aligned red raised grid segment">
+						<div class="row">
+							<div class="ui center aligned column grid">
+								<div class="field">
+									<div class="ui blue label">VPN Name</div>
+									<input type="text" id="uvpnname">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="ui one column center aligned green raised grid segment">
+						<div class="row">
+							<div class="ui left aligned column grid">	
+								<div class="field">
+									<div class="ui blue label">Client Profile Name</div>
+									<input type="text" id="uclientprfname">
+								</div>
+							</div>
+						</div>
+						<div class="ui two column center aligned grid">
+							<div class="row">
+								<div class="ui left aligned column grid">
+									<div class="field">
+										<div class="ui blue label">Max Connections</div>
+										<input type="number" id="umaxconn">
+									</div>
+								</div>
+								<div class="ui left aligned column grid">
+									<div class="field">
+										<div class="ui blue label">Max Subscriptions</div>
+										<input type="number" id="umaxsub">
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="ui two column center aligned grid">
+							<div class="row">
+								<div class="ui left aligned column grid">
+									<div class="field">
+										<div class="ui blue label">Max Transacted session</div>
+										<input type="text" id="umaxtrdsession">
+									</div>
+								</div>
+								<div class="ui left aligned column grid">
+									<div class="field">
+										<div class="ui blue label">Max Transactions</div>
+										<input type="number" id="umaxtrac">
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="ui two column center aligned grid">
+							<div class="row">
+								<div class="ui left aligned column grid">
+									<div class="field">
+										<div class="ui vertical accordion menu">
+											<a class="ui red left ribbon label">User Level Limit</a>
+											<div class="item">
+												<a class="title">
+													<i class="dropdown icon"></i><strong>Ingress Flow</strong>
+												</a>
+												<div class="content">
+													<div class="ui form">
+														<div class="grouped fields">
+															<div class="field">
+																<div class="ui radio checkbox">
+																	<input type="radio" name="size" value="50">
+																	<label>Small-50</label>
+																</div>
+															</div>
+															<div class="field">
+																<div class="ui radio checkbox">
+																	<input type="radio" name="size" value="100">
+																	<label>Medium-100</label>
+																</div>
+															</div>
+															<div class="field">
+																<div class="ui radio checkbox">
+																	<input type="radio" name="size" value="200">
+																	<label>Large-200</label>
+																</div>
+															</div>
+															<div class="field">
+																<div class="ui radio checkbox">
+																	<input type="radio" name="size" value=""/>
+																	<label>Others</label>
+																	<div class="ui mini input">
+																		<input type="number" id="size" value=""/>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>	
+												</div>	
+											</div>
+											<div class="item">
+												<a class="title">
+													<i class="dropdown icon"></i><strong>Egress Flow</strong>
+												</a>
+												<div class="content">
+													<div class="ui form">
+														<div class="grouped fields">
+															<div class="field">
+																<div class="ui radio checkbox">
+																	<input type="radio" name="size" value="50">
+																	<label>Low-50</label>
+																</div>
+															</div>
+															<div class="field">
+																<div class="ui radio checkbox">
+																	<input type="radio" name="size" value="100">
+																	<label>Medium-100</label>
+																</div>
+															</div>	
+															<div class="field">
+																<div class="ui radio checkbox">
+																	<input type="radio" name="size" value="200">
+																	<label>Large-200</label>
+																</div>
+															</div>
+															<div class="field">
+																<div class="ui radio checkbox">
+																	<input type="radio" name="size" value=""/>
+																	<label>Others</label>
+																	<div class="ui mini input">
+																		<input type="number" name="size" value="">
+																	</div>
+																</div>	
+															</div>
+														</div>													
+													</div>
+												</div>
+											</div>
+											<div class="item">
+												<a class="title">
+													<i class="dropdown icon"></i><strong>Max Endpoints</strong>
+												</a>
+												<div class="content">
+													<div class="ui form">
+														<div class="grouped fields">
+															<div class="field">
+																<div class="ui radio checkbox">
+																	<input type="radio" name="size" value="50">
+																	<label>Low-10</label>
+																</div>
+															</div>
+															<div class="field">
+																<div class="ui radio checkbox">
+																	<input type="radio" name="size" value="100">
+																	<label>Medium-50</label>
+																</div>
+															</div>	
+															<div class="field">
+																<div class="ui radio checkbox">
+																	<input type="radio" name="size" value="200">
+																	<label>Large-100</label>
+																</div>
+															</div>
+															<div class="field">
+																<div class="ui radio checkbox">
+																	<input type="radio" name="size" value=""/>
+																	<label>Others</label>
+																	<div class="ui mini input">
+																		<input type="number" name="size" value="">
+																	</div>
+																</div>	
+															</div>
+														</div>													
+													</div>
+												</div>
+											</div>  	  	
+										</div>
+									</div>
+								</div>
+								<div class="ui left aligned column grid">
+									<div class="field">
+										<div class="ui vertical fluid accordion field menu">
+											<a class="ui green left ribbon label">Guaranteed Permission</a>
+											<div class="item">
+												<a class="title">
+													<i class="dropdown icon"></i><strong>Allow Guaranteed Msg Send</strong>
+												</a>
+												<div class="content">
+													<div class="ui form">
+														<div class="grouped fields">
+															<div class="field">
+																<div class="ui radio checkbox">
+																	<input type="radio" name="size" value="yes">
+																	<label>Allow</label>
+																</div>
+															</div>
+															<div class="field">
+																<div class="ui radio checkbox">
+																	<input type="radio" name="size" value="no">
+																	<label>Disallow</label>
+																</div>
+															</div>
+														</div>	
+													</div>	
+												</div>
+											</div>
+											<div class="item">
+												<a class="title">
+													<i class="dropdown icon"></i><strong>Allow Guaranteed Msg Receive</strong>
+												</a>
+												<div class="content">
+													<div class="ui form">
+														<div class="grouped fields">
+															<div class="field">
+																<div class="ui radio checkbox">
+																	<input type="radio" name="size" value="yes">
+																	<label>Allow</label>
+																</div>
+															</div>
+															<div class="field">
+																<div class="ui radio checkbox">
+																	<input type="radio" name="size" value="no">
+																	<label>Disallow</label>
+																</div>
+															</div>	
+														</div>													
+													</div>
+												</div>
+											</div>
+											<div class="item">
+												<a class="title">
+													<i class="dropdown icon"></i><strong>Allow Endpoint Creation</strong>
+												</a>
+												<div class="content">
+													<div class="ui form">
+														<div class="grouped fields">
+															<div class="field">
+																<div class="ui radio checkbox">
+																	<input type="radio" name="size" value="yes">
+																	<label>Allow</label>
+																</div>
+															</div>
+															<div class="field">
+																<div class="ui radio checkbox">
+																	<input type="radio" name="size" value="no">
+																	<label>Disallow</label>
+																</div>
+															</div>	
+														</div>													
+													</div>
+												</div>
+											</div>  	  	
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>	
+					</div>
+					<div class="ui one column center aligned green raised grid segment">
+						<div class="row">
+							<div class="ui left aligned column grid">	
+								<div class="field">
+									<div class="ui blue label">ACL Profile Name</div>
+									<input type="text" id="uclientprfname">
+								</div>
+							</div>
+						</div>
+						<div class="ui three column center aligned grid">
+							<div class="row">
+								<div class="column">
+									<div class="field"><br>
+										<div class="ui blue label">Client Connection</div>
+										<div class="ui center aligned column grid">
+											<div class="grouped fields" id="cltcon">
+												<label></label><br>
+												<div class="field">
+													<div class="ui center slider checkbox">
+														<input id="allowconn" type="radio" name="cltcon" checked="checked">
+														<label id="allcon">Allow all IPs</label>
+													</div>
+												</div>	
+												<div class="field">
+													<div class="ui center slider checkbox">
+														<input id="disallowconn" type="radio" name="cltcon">
+														<label id="discon">Allow selected IPs</label>
+													</div>
+												</div>
+											</div>	
+										</div>
+									</div>
+								</div>
+								<div class="column">
+									<div class="inline field"><br>
+										<div class="ui blue label">Publish Topics</div>
+										<div class="ui center aligned column grid">
+											<div class="grouped fields" id="cltcon">
+												<label></label><br>
+												<div class="field">
+													<div class="ui center slider checkbox">
+														<input id="allowtppub" type="radio" name="dc" checked="checked">
+														<label id="alltopic">Allow all Topics</label>
+													</div>
+												</div>
+												<div class="field">
+													<div class="ui center slider checkbox">
+														<input id="disallowtppub" type="radio" name="dc">
+														<label id="distopic">Allow selected Topics</label>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>	
+								</div>
+								<div class="column">
+									<div class="inline field"><br>
+										<div class="ui blue label">Subscribe Topics</div>
+										<div class="ui center aligned column grid">
+											<div class="grouped fields" id="cltcon">
+												<label></label><br>
+												<div class="field">
+													<div class="ui center slider checkbox">
+														<input id="allowtppub" type="radio" name="dc" checked="checked">
+														<label id="alltopic">Allow all Topics</label>
+													</div>
+												</div>
+												<div class="field">
+													<div class="ui center slider checkbox">
+														<input id="disallowtppub" type="radio" name="dc">
+														<label id="distopic">Allow selected Topics</label>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>	
+								</div>		
+							</div>
+						</div>
+					</div>
+					<div class="ui one column center aligned green raised grid segment">
+						<div class="row">
+							<div class="ui left aligned column grid">	
+								<div class="field">
+									<div class="ui blue label">Client UserName</div>
+									<input type="text" id="cltusername">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="ui two column center aligned grid">
+								<div class="row">
+									<div class="ui left aligned column grid">
+										<div class="field">
+											<div class="ui blue label">Client Profile Name</div>
+											<input type="text" id="cltprfname">
+										</div>
+									</div>
+									<div class="ui left aligned column grid">
+										<div class="field">
+											<div class="ui blue label">ACL Profile Name</div>
+											<input type="number" id="aclprfname">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<button class="ui green button"><i class="check icon"></i><strong>Validate</strong></button>
+					<button class="ui blue button"><i class="download icon"></i><strong>Download</strong></button>
+					<button class="ui orange button"><strong>Next</strong><i class="hand point right icon"></i></button>
+				</form>
+			</div> <!-- Username tab ends -->
+
+			<div id="bridgedata" class="ui bottom attached tab segment" data-tab="bridgetab">
+				<form class="ui form">
+				VPN Bridge
+				</form>
+			</div> <!-- Bridge tab ends -->
+
+			<div id="jndidata" class="ui bottom attached tab segment" data-tab="jnditab">
+				<form class="ui form">
+				JNDI
+				</form>
+			</div> <!-- JNDI tab ends -->
+		</div>
+<!--########## Main container ########## -->
+	</body>
+</html>
