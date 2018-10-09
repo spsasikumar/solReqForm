@@ -31,10 +31,9 @@
 		<script>
 			$(document).ready( function() {
 			$( ".ui.accordion" ).accordion();
-		/*	$('.ui.dropdown').dropdown({
-			on: 'hover'
-			}); */
-			} );
+			$('.ui.dropdown').dropdown({
+			on: 'hover'}); 
+			});
 		</script>
 	
 	</head>
@@ -386,7 +385,7 @@
 							<div class="ui left aligned column grid">
 								<div class="field">
 									<div class="ui teal circular label">VPN Name</div>
-									<input class="ui fluid input focus" type="text" name="qvpnname">
+									<input type="text" id="qvpnname">
 								</div>
 							</div>
 							<div class="ui left aligned column grid">
@@ -394,7 +393,7 @@
 									<div class="ui teal circular label">Queue Name</div>
 									<div class="ui focus left icon input">
 										<i class="exchange icon"></i>
-										<input type="text" name="queuename">
+										<input type="text" id="queuename">
 									</div>
 								</div>
 							</div>
@@ -405,7 +404,7 @@
 									<div class="ui teal circular label">Queue Quota</div>
 									<div class="ui focus right labeled left icon input">
 										<i class="database icon"></i>
-										<input type="number" id="queuequota" placeholder="">
+										<input type="number" id="queuequota" placeholder='Less than 5000'>
 										<a class="ui label">MB</a>
 									</div>
 								</div>
@@ -413,6 +412,12 @@
 							<div class="ui left aligned column grid">
 								<div class="field">
 									<div class="ui teal circular label">Queue Type</div>
+									<div class="ui buttons">
+										<div class="ui button">Exclusive</div>
+										<div class="or"></div>
+										<div class="ui positive button">Non-Exclusive</div>
+									</div>
+									  <!--
 									<div class="ui focus right labeled left icon input">
 										<div class="ui fluid dropdown selection">
 											<input type="hidden" name="qtype">
@@ -423,7 +428,7 @@
 												<div class="item" data-value="non-exclusive">Non-Exclusive</div>
 											</div>
 										</div>
-									</div>
+									</div> -->
 								</div>
 							</div>
 						</div>
@@ -433,7 +438,7 @@
 									<div class="ui teal circular label">Max Redelivery</div>
 									<div class="ui labeled left icon input">
 										<i class="undo icon"></i>
-										<input type="number" id="queuequota" value=0 placeholder="">
+										<input type="number" name="qmaxred" value=0 placeholder="">
 									</div>
 								</div>
 							</div>
@@ -506,7 +511,7 @@
 					<div class="ui green submit button" id="queuevalid" onClick="valid_queue_tab()">
 						<i class="check icon"></i><strong>Validate</strong>
 					</div>
-					<div class="ui blue button" id="queuedownload"><i class="download icon"></i><strong>Download</strong></div>
+					<div class="ui blue disabled button" id="queuedownload"><i class="download icon"></i><strong>Download</strong></div>
 				<!--	<button class="ui red button"><strong>Next</strong><i class="hand point right icon"></i></button> -->
 					<div class="ui error message"></div>
 				</div>

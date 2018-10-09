@@ -60,24 +60,24 @@ $(document).ready(function() {
     $('.tabular.menu .item').tab();
 });
 
-function qenabledownload() {
-    $("#queuedownload").removeClass("disabled");
-    $("#queuedownload").addClass("active"); 
-  }
 
-  function displayfailure()
-  {
-    $("#queuedownload").removeClass("enabled");
-    $("#queuedownload").addClass("inactive");
-  }
+
+
+
 
 function valid_queue_tab()
 {
     $('#queueform').form({
- //fields : validationRules,
-  inline : true,
-on     : 'blur',
-   fields: {
+
+ inline : true, on : 'blur', 
+ fields: {
+  
+    qvpnname:['empty'],
+    queuename:['empty'],
+    queuequota:['empty', 'integer[0..5000]']
+  
+ },
+ /*
     qvpnname: {
       identifier  : 'qvpnname',
       rules: [
@@ -85,9 +85,9 @@ on     : 'blur',
           type   : 'empty',
           prompt : 'Please enter a VPN Name'
         }
-      ]
-    },
-    queuename: {
+    ]
+   },
+   queuename: {
       identifier  : 'queuename',
       rules: [
         {
@@ -95,9 +95,20 @@ on     : 'blur',
           prompt : 'Please enter queue name'
         }
       ]
-    }
-    },
-
+  },
+  queuequota: {
+        identifier  : 'queuequota',
+        rules: [
+          {
+            type   : 'empty',  
+            prompt : 'Please enter Queue Quota',
+            type   : 'smallerThan[500]',  
+            prompt : 'Please less than 500MB Quota'
+          }
+        ]
+   }
+},
+*/
   onSuccess: function(event, fields){
     $("#queuedownload").removeClass("disabled");
     $("#queuedownload").addClass("active"); 
@@ -108,7 +119,7 @@ onFailure: function(formErrors, fields){
     $("#queuedownload").removeClass("active");
 }   
 
-});  
+});
 
 }
 
